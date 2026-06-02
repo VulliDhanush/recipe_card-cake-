@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Double Chocolate Fudge Cake | Interactive Recipe Card</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="An interactive recipe card for baking the ultimate double chocolate fudge cake, featuring serving scaling, collapsible sections, kitchen timers, and a step-by-step guide.">
+  <meta name="keywords" content="Chocolate Cake, Recipe, Baking, Interactive, Kitchen Timer, Dessert">
+  <meta name="author" content="Gourmet Kitchen">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Background Decorative Blurs -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <main class="recipe-container">
+    <!-- Back Navigation -->
+    <div class="back-nav">
+      <a href="index.html" class="btn-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        Back to Recipes
+      </a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="recipe-header">
+      <div class="header-content">
+        <span class="recipe-badge">Chef's Signature</span>
+        <h1 id="recipe-title" class="recipe-title">Ultimate Double Chocolate Fudge Cake</h1>
+        <p class="recipe-subtitle">A rich, moist chocolate cake layered with a glossy dark chocolate fudge glaze and
+          fresh raspberries. The perfect centerpiece for celebrations.</p>
+
+        <!-- Recipe Quick Stats -->
+        <div class="recipe-stats-grid">
+          <div class="stat-card" id="stat-prep">
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <div class="stat-info">
+              <span class="stat-label">Prep Time</span>
+              <span class="stat-val">25 mins</span>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-cook">
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+              <line x1="6" y1="1" x2="6" y2="4"></line>
+              <line x1="10" y1="1" x2="10" y2="4"></line>
+              <line x1="14" y1="1" x2="14" y2="4"></line>
+            </svg>
+            <div class="stat-info">
+              <span class="stat-label">Bake Time</span>
+              <span class="stat-val">30 mins</span>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-servings-display">
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <div class="stat-info">
+              <span class="stat-label">Servings</span>
+              <span class="stat-val" id="current-servings-text">8 servings</span>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-difficulty">
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+              </polygon>
+            </svg>
+            <div class="stat-info">
+              <span class="stat-label">Difficulty</span>
+              <span class="stat-val">Easy-Medium</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Image Wrapper -->
+      <div class="recipe-hero-wrapper">
+        <img src="images/chocolate_cake.png" alt="Double Chocolate Fudge Cake" class="recipe-hero-img">
+        <div class="image-overlay"></div>
+      </div>
+    </header>
+
+    <!-- Global Controls: Servings Calculator & Print -->
+    <section class="global-controls" id="recipe-controls">
+      <div class="servings-calculator">
+        <span class="calculator-label">Adjust Servings:</span>
+        <div class="calculator-btn-group">
+          <button id="btn-decrease-servings" class="btn-calc" aria-label="Decrease servings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <span id="servings-count" class="servings-count-val">8</span>
+          <button id="btn-increase-servings" class="btn-calc" aria-label="Increase servings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button id="btn-print-recipe" class="btn-secondary" aria-label="Print Recipe">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          Print Recipe
+        </button>
+        <button id="btn-start-cooking" class="btn-primary" aria-label="Start Cooking">
+          <svg class="btn-icon pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Start Cooking
+        </button>
+      </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="recipe-grid">
+
+      <!-- INGREDIENTS COLUMN -->
+      <section class="recipe-card-section" id="section-ingredients">
+        <button class="section-toggle-header" id="btn-toggle-ingredients" aria-expanded="true"
+          aria-controls="ingredients-collapse-body">
+          <h2 class="section-heading">
+            <svg class="section-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            Ingredients
+          </h2>
+          <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+
+        <div id="ingredients-collapse-body" class="section-collapse-body expanded">
+          <p class="section-intro">Check off items as you gather them in your kitchen. Quantities scale automatically
+            when servings are changed.</p>
+
+          <div class="ingredient-category">
+            <h3 class="category-title">For the Cake Batter</h3>
+            <ul class="ingredient-list">
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="2">2</span>
+                    <span class="ingredient-unit">cups</span>
+                    <span class="ingredient-name">all-purpose flour</span>
+                    <span class="ingredient-metric">(<span class="ingredient-qty" data-base="250">250</span>g)</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="2">2</span>
+                    <span class="ingredient-unit">cups</span>
+                    <span class="ingredient-name">granulated sugar</span>
+                    <span class="ingredient-metric">(<span class="ingredient-qty" data-base="400">400</span>g)</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="0.75">¾</span>
+                    <span class="ingredient-unit">cup</span>
+                    <span class="ingredient-name">unsweetened cocoa powder</span>
+                    <span class="ingredient-metric">(<span class="ingredient-qty" data-base="75">75</span>g)</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="2">2</span>
+                    <span class="ingredient-unit">tsp</span>
+                    <span class="ingredient-name">baking powder</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="1.5">1 ½</span>
+                    <span class="ingredient-unit">tsp</span>
+                    <span class="ingredient-name">baking soda</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="1">1</span>
+                    <span class="ingredient-unit">tsp</span>
+                    <span class="ingredient-name">fine sea salt</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="2">2</span>
+                    <span class="ingredient-unit">large</span>
+                    <span class="ingredient-name">eggs</span> <span class="supplemental">(room temperature)</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="1">1</span>
+                    <span class="ingredient-unit">cup</span>
+                    <span class="ingredient-name">whole milk</span>
+                    <span class="ingredient-metric">(<span class="ingredient-qty" data-base="240">240</span>ml)</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="0.5">½</span>
+                    <span class="ingredient-unit">cup</span>
+                    <span class="ingredient-name">vegetable oil</span>
+                    <span class="ingredient-metric">(<span class="ingredient-qty" data-base="120">120</span>ml)</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="2">2</span>
+                    <span class="ingredient-unit">tsp</span>
+                    <span class="ingredient-name">pure vanilla extract</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="1">1</span>
+                    <span class="ingredient-unit">cup</span>
+                    <span class="ingredient-name">boiling water or hot coffee</span>
+                    <span class="ingredient-metric">(<span class="ingredient-qty" data-base="240">240</span>ml)</span>
+                  </span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="ingredient-category">
+            <h3 class="category-title">For the Fudge Glaze & Topping</h3>
+            <ul class="ingredient-list">
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="1">1</span>
+                    <span class="ingredient-unit">cup</span>
+                    <span class="ingredient-name">heavy cream</span>
+                    <span class="ingredient-metric">(<span class="ingredient-qty" data-base="240">240</span>ml)</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="8">8</span>
+                    <span class="ingredient-unit">oz</span>
+                    <span class="ingredient-name">dark chocolate chips (60% cacao)</span>
+                    <span class="ingredient-metric">(<span class="ingredient-qty" data-base="225">225</span>g)</span>
+                  </span>
+                </label>
+              </li>
+              <li class="ingredient-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="ingredient-checkbox">
+                  <span class="checkmark"></span>
+                  <span class="ingredient-details">
+                    <span class="ingredient-qty" data-base="0.5">0.5</span>
+                    <span class="ingredient-unit">cup</span>
+                    <span class="ingredient-name">fresh raspberries</span> <span class="supplemental">(for
+                      garnish)</span>
+                  </span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- INSTRUCTIONS COLUMN -->
+      <section class="recipe-card-section" id="section-instructions">
+        <button class="section-toggle-header" id="btn-toggle-instructions" aria-expanded="true"
+          aria-controls="instructions-collapse-body">
+          <h2 class="section-heading">
+            <svg class="section-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            Instructions
+          </h2>
+          <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+
+        <div id="instructions-collapse-body" class="section-collapse-body expanded">
+          <p class="section-intro">Follow these steps carefully for the perfect fluffy and moist chocolate cake crumb.
+          </p>
+
+          <ol class="steps-list" id="steps-ordered-list">
+            <li class="step-card" id="step-0" data-duration="600">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <div class="step-header">
+                  <h4 class="step-title">Prep & Preheat Oven</h4>
+                  <span class="step-duration-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    10 mins
+                  </span>
+                </div>
+                <p class="step-text">Preheat your oven to 350°F (175°C). Butter and lightly flour two 9-inch round cake
+                  pans. Line the bottoms with parchment paper for easy removal later.</p>
+              </div>
+            </li>
+
+            <li class="step-card" id="step-1" data-duration="300">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="step-header">
+                  <h4 class="step-title">Whisk Dry Ingredients</h4>
+                  <span class="step-duration-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    5 mins
+                  </span>
+                </div>
+                <p class="step-text">In a large mixing bowl, combine the flour, sugar, cocoa powder, baking powder,
+                  baking soda, and fine sea salt. Whisk vigorously until the mixture is uniform and lump-free.</p>
+              </div>
+            </li>
+
+            <li class="step-card" id="step-2" data-duration="300">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <div class="step-header">
+                  <h4 class="step-title">Incorporate Wet Ingredients</h4>
+                  <span class="step-duration-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    5 mins
+                  </span>
+                </div>
+                <p class="step-text">Add the eggs, whole milk, vegetable oil, and vanilla extract to the dry mixture.
+                  Beat with an electric mixer on medium speed for about 2 minutes until smooth and slightly thickened.
+                </p>
+              </div>
+            </li>
+
+            <li class="step-card" id="step-3" data-duration="300">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <div class="step-header">
+                  <h4 class="step-title">Bloom Cocoa with Boiling Water</h4>
+                  <span class="step-duration-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    5 mins
+                  </span>
+                </div>
+                <p class="step-text">Reduce mixer speed to low and slowly stream in the boiling water (or hot coffee,
+                  which intensifies chocolate flavour). Mix until combined. The batter will be extremely thin and
+                  liquid; this is expected!</p>
+              </div>
+            </li>
+
+            <li class="step-card" id="step-4" data-duration="1800">
+              <div class="step-num">5</div>
+              <div class="step-content">
+                <div class="step-header">
+                  <h4 class="step-title">Pour and Bake</h4>
+                  <span class="step-duration-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    30 mins
+                  </span>
+                </div>
+                <p class="step-text">Divide the batter evenly between your two prepared cake pans. Bake on the middle
+                  rack for 30 to 35 minutes, or until a wooden toothpick inserted into the center comes out clean or
+                  with a few moist crumbs.</p>
+              </div>
+            </li>
+
+            <li class="step-card" id="step-5" data-duration="900">
+              <div class="step-num">6</div>
+              <div class="step-content">
+                <div class="step-header">
+                  <h4 class="step-title">Cool, Glaze, & Frost</h4>
+                  <span class="step-duration-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    15 mins
+                  </span>
+                </div>
+                <p class="step-text">Cool the cakes in their pans for 10 minutes, then invert onto wire cooling racks to
+                  cool completely. Heat heavy cream until steaming, pour over chocolate chips, let sit for 2 minutes,
+                  then whisk into a glossy glaze. Pour glaze over cooled cake layers and garnish with raspberries.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- COOKING MODE FOCUS INTERFACE (Starts collapsed, activates via Start Cooking) -->
+  <div class="cooking-focus-overlay" id="cooking-focus-overlay">
+    <div class="cooking-focus-panel">
+      <!-- Upper Status Bar -->
+      <div class="cooking-panel-header">
+        <div class="panel-header-details">
+          <h3>Cooking Mode Focus</h3>
+          <p>Step <span id="focus-step-num">1</span> of <span id="focus-total-steps">6</span></p>
+        </div>
+        <button class="btn-close-focus" id="btn-close-focus" aria-label="Exit Cooking Mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Linear Progress Bar -->
+      <div class="cooking-progress-container">
+        <div class="cooking-progress-bar" id="cooking-progress-bar"></div>
+      </div>
+
+      <!-- Main Step Display Card -->
+      <div class="focus-step-card-wrapper">
+        <div class="focus-step-card" id="focus-step-card">
+          <span class="focus-step-badge" id="focus-step-badge">Active Step 1</span>
+          <h2 class="focus-step-title" id="focus-step-title">Prep & Preheat Oven</h2>
+          <p class="focus-step-desc" id="focus-step-desc">Preheat your oven to 350°F (175°C). Butter and lightly flour
+            two 9-inch round cake pans. Line the bottoms with parchment paper for easy removal later.</p>
+        </div>
+      </div>
+
+      <!-- Interactive Timer Card -->
+      <div class="cooking-timer-container">
+        <div class="timer-card">
+          <div class="timer-circle-wrapper">
+            <svg class="timer-svg" viewBox="0 0 100 100">
+              <circle class="timer-circle-bg" cx="50" cy="50" r="45"></circle>
+              <circle class="timer-circle-progress" id="timer-progress-ring" cx="50" cy="50" r="45"></circle>
+            </svg>
+            <div class="timer-time" id="timer-time-display">10:00</div>
+          </div>
+          <div class="timer-controls">
+            <button id="btn-timer-toggle" class="btn-timer-control" aria-label="Start Timer">
+              <svg id="timer-play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <svg id="timer-pause-icon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+            </button>
+            <button id="btn-timer-reset" class="btn-timer-control" aria-label="Reset Timer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Panel Controls -->
+      <div class="cooking-panel-nav">
+        <button id="btn-focus-prev" class="btn-focus-nav btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Previous
+        </button>
+        <button id="btn-focus-next" class="btn-focus-nav btn-primary">
+          Next Step
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti/Celebration Canvas overlay -->
+  <div class="celebration-overlay" id="celebration-overlay">
+    <div class="celebration-card">
+      <div class="celebration-badge">🎉</div>
+      <h2>Happy Baking!</h2>
+      <p>You have completed all the steps for the Ultimate Double Chocolate Fudge Cake. Enjoy your masterpiece!</p>
+      <button class="btn-primary" id="btn-close-celebration">Finish</button>
+    </div>
+  </div>
+
+  <footer class="recipe-footer">
+    <p>Handcrafted with ❤️ for gourmet bakers everywhere.</p>
+  </footer>
+
+  <!-- JS Logic -->
+  <script src="script.js"></script>
+</body>
+
+</html>
